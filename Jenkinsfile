@@ -17,7 +17,7 @@ pipeline {
         stage("Checkout from SCM") {
             steps {
                 git branch: 'main',
-                    credentialsId: 'github',
+                    credentialsId: 'githubsecond',
                     url: 'https://github.com/Anuragsaroj/project_1_gitops-register-app.git'
             }
         }
@@ -46,7 +46,7 @@ pipeline {
                     git diff --cached --quiet || git commit -m "Updated Deployment Manifest"
                 """
 
-                withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
+                withCredentials([gitUsernamePassword(credentialsId: 'githubsecond', gitToolName: 'Default')]) {
                     sh """
                         git push https://Anuragsaroj:${GIT_PASSWORD}@github.com/Anuragsaroj/project_1_gitops-register-app.git main
                     """
